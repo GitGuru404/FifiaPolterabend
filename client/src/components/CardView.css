@@ -1,0 +1,270 @@
+/* ── Card View ──────────────────────────────────────────────── */
+
+.card-view {
+  min-height: 100dvh;
+  background: #0f1923;
+  padding: 16px 16px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* ── Phase badge ── */
+.phase-badge {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #162030;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  padding: 10px 16px;
+}
+
+.phase-number {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: rgba(255, 255, 255, 0.35);
+  text-transform: uppercase;
+}
+
+.phase-name {
+  font-size: 15px;
+  font-weight: 900;
+  color: #f0d060;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ── Card spotlight ── */
+.card-spotlight {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.icon-glow {
+  position: absolute;
+  inset: -50px;
+  background: radial-gradient(circle, rgba(201, 162, 39, 0.35) 0%, transparent 70%);
+  pointer-events: none;
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.05); }
+}
+
+.card-class {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: rgba(255, 255, 255, 0.35);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* ── Stat bars ── */
+.stat-bars {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  background: #162030;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+.stat-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stat-bar-label {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.4);
+  width: 62px;
+  flex-shrink: 0;
+  text-transform: uppercase;
+}
+
+.stat-bar-track {
+  flex: 1;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.stat-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stat-bar-value {
+  font-size: 13px;
+  font-weight: 800;
+  color: #fff;
+  width: 24px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* ── Challenges section ── */
+.challenges-section,
+.log-section {
+  width: 100%;
+  max-width: 400px;
+}
+
+.section-title {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  color: rgba(255, 255, 255, 0.35);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.section-hint {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.25);
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+
+/* ── Challenge cards (tappable buttons) ── */
+.challenge-card {
+  width: 100%;
+  text-align: left;
+  background: #162030;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 6px;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: block;
+  color: #fff;
+}
+
+.challenge-card:hover,
+.challenge-card:active {
+  background: #1e2d42;
+  transform: translateY(-1px);
+}
+
+.challenge-card.active {
+  border-color: rgba(240, 208, 96, 0.35);
+  background: rgba(240, 208, 96, 0.06);
+}
+
+.challenge-card.pending {
+  border-color: rgba(251, 191, 36, 0.2);
+  background: rgba(251, 191, 36, 0.04);
+}
+
+.challenge-card.completed {
+  opacity: 0.5;
+  border-color: rgba(52, 211, 153, 0.15);
+}
+
+.challenge-card.failed {
+  opacity: 0.5;
+  border-color: rgba(240, 80, 96, 0.2);
+}
+
+.challenge-card.locked {
+  opacity: 0.35;
+}
+
+.challenge-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.challenge-name-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+}
+
+.challenge-boss-tag {
+  font-size: 12px;
+  color: #f0d060;
+  flex-shrink: 0;
+}
+
+.challenge-name {
+  font-size: 14px;
+  font-weight: 800;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+}
+
+.challenge-status-icon {
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.challenge-desc {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.5;
+  margin-top: 6px;
+}
+
+.challenge-rewards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 8px;
+}
+
+.reward-chip {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  background: rgba(52, 211, 153, 0.12);
+  color: #34d399;
+  border: 1px solid rgba(52, 211, 153, 0.25);
+  border-radius: 5px;
+  padding: 3px 8px;
+  text-transform: uppercase;
+}
+
+/* ── Log ── */
+.log-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.log-entry {
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.log-msg {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.4;
+}

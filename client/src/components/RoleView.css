@@ -1,0 +1,208 @@
+/* ── Role View ──────────────────────────────────────────────── */
+
+.role-view {
+  min-height: 100dvh;
+  background: #0f1923;
+  padding: 20px 16px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* ── Header ── */
+.role-header {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #162030;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  padding: 10px 16px;
+}
+
+.role-phase-label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.35);
+  text-transform: uppercase;
+}
+
+.role-player-name {
+  font-size: 18px;
+  font-weight: 900;
+  color: #f0d060;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ── Helper status banner ── */
+.helper-status-banner {
+  width: 100%;
+  max-width: 380px;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.helper-status-banner.assigned {
+  background: rgba(52, 211, 153, 0.1);
+  border: 1px solid rgba(52, 211, 153, 0.3);
+  color: #34d399;
+}
+
+.helper-status-banner.volunteered {
+  background: rgba(251, 191, 36, 0.08);
+  border: 1px solid rgba(251, 191, 36, 0.25);
+  color: #fbbf24;
+}
+
+.helper-status-note {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+/* ── Role card ── */
+.role-card {
+  width: 100%;
+  max-width: 380px;
+  border-radius: 14px;
+  padding: 24px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s;
+}
+
+.role-card.available {
+  background: #162030;
+  border: 2px solid rgba(240, 208, 96, 0.4);
+  box-shadow: 0 0 30px rgba(240, 208, 96, 0.08);
+}
+
+.role-card.used {
+  background: #162030;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  opacity: 0.55;
+}
+
+.role-card.no-role {
+  background: #162030;
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+}
+
+.role-icon {
+  font-size: 52px;
+  line-height: 1;
+}
+
+.role-name {
+  font-size: 20px;
+  font-weight: 900;
+  color: #f0d060;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.role-description {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.5;
+  max-width: 280px;
+}
+
+.role-status {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-top: 4px;
+}
+
+.role-status.available {
+  color: #34d399;
+  background: rgba(52, 211, 153, 0.1);
+  border: 1px solid rgba(52, 211, 153, 0.2);
+}
+
+.role-status.used {
+  color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.role-status.helper {
+  color: #34d399;
+  background: rgba(52, 211, 153, 0.1);
+  border: 1px solid rgba(52, 211, 153, 0.25);
+}
+
+/* ── Instructions ── */
+.role-instructions {
+  width: 100%;
+  max-width: 380px;
+  background: #162030;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+.instructions-title {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.35);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.instructions-list {
+  margin: 0 0 10px;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.instructions-list li {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.4;
+}
+
+.instructions-note {
+  font-size: 12px;
+  color: rgba(240, 180, 80, 0.7);
+  font-style: italic;
+}
+
+/* ── Phase dots ── */
+.phase-dots {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.phase-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+
+.phase-dot.past    { background: rgba(52, 211, 153, 0.55); }
+.phase-dot.current { background: #f0d060; box-shadow: 0 0 8px rgba(240, 208, 96, 0.6); }
+.phase-dot.future  { background: rgba(255, 255, 255, 0.12); }

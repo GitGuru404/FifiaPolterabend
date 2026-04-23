@@ -1,0 +1,157 @@
+/* ── Join Screen ─────────────────────────────────────────────── */
+
+.join-screen {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0f1923;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle radial glow behind the card */
+.join-bg-effect {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,162,39,0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.join-card {
+  position: relative;
+  background: #162030;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 20px;
+  padding: 32px 24px;
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.04),
+    0 24px 60px rgba(0,0,0,0.5);
+}
+
+/* EA SPORTS FC badge at top */
+.join-ea-badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.join-logo {
+  font-size: 44px;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.join-title {
+  font-size: 38px;
+  font-weight: 900;
+  color: #f0d060;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.join-subtitle {
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+
+.join-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.join-label {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.join-input {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  padding: 14px 16px;
+  outline: none;
+  transition: border-color 0.2s;
+  text-align: center;
+}
+
+.join-input:focus {
+  border-color: rgba(240, 208, 96, 0.5);
+}
+
+.join-input::placeholder {
+  color: rgba(255, 255, 255, 0.2);
+  letter-spacing: 2px;
+}
+
+.join-btn {
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 15px;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+
+.join-btn.primary {
+  background: linear-gradient(135deg, #c9a227, #f0d060);
+  color: #1a0f00;
+}
+
+.join-btn.primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(201, 162, 39, 0.45);
+}
+
+.join-btn.primary:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.join-btn.ghost {
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.join-btn.ghost:hover {
+  color: rgba(255, 255, 255, 0.7);
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.join-error {
+  color: #f05060;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-align: center;
+}

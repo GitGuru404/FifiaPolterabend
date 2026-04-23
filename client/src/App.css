@@ -1,0 +1,130 @@
+/* ── Global App ─────────────────────────────────────────────── */
+
+.app {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: #0f1923;
+}
+
+.app-main {
+  flex: 1;
+  padding-bottom: 72px; /* space for bottom nav */
+}
+
+/* ── Bottom Nav ─────────────────────────────────────────────── */
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 68px;
+  background: #0d1520;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: stretch;
+  z-index: 100;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.nav-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  padding: 8px 0;
+  position: relative;
+  transition: color 0.15s;
+}
+
+.nav-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 20%;
+  right: 20%;
+  height: 2px;
+  background: #f0d060;
+  border-radius: 0 0 2px 2px;
+  transform: scaleX(0);
+  transition: transform 0.2s;
+}
+
+.nav-btn.active {
+  color: #f0d060;
+}
+
+.nav-btn.active::after {
+  transform: scaleX(1);
+}
+
+.nav-icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.nav-label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ── Connection dot ─────────────────────────────────────────── */
+
+.conn-dot {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  z-index: 200;
+  transition: background 0.3s;
+}
+
+.conn-dot.online  { background: #34d399; }
+.conn-dot.offline { background: #f05060; animation: blink 1s ease-in-out infinite; }
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.2; }
+}
+
+/* ── Loading screen ─────────────────────────────────────────── */
+
+.loading-screen {
+  min-height: 100dvh;
+  background: #0f1923;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.loading-ball {
+  font-size: 52px;
+  animation: spin 1.6s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: rgba(255, 255, 255, 0.3);
+  text-transform: uppercase;
+}

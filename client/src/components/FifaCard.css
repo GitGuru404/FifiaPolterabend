@@ -1,0 +1,234 @@
+/* ── FIFA Card ─────────────────────────────────────────────── */
+
+.fifa-card {
+  width: 220px;
+  height: 320px;
+  border-radius: 12px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Arial Narrow', Arial, sans-serif;
+  cursor: default;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  flex-shrink: 0;
+}
+
+.fifa-card:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+/* Gold card */
+.fifa-card.gold {
+  background: linear-gradient(
+    145deg,
+    #c9a227 0%,
+    #f5d76e 25%,
+    #e8b923 50%,
+    #f0cb45 70%,
+    #b8890a 100%
+  );
+  box-shadow:
+    0 0 20px rgba(201, 162, 39, 0.6),
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 220, 0.4);
+}
+
+/* ICON card — dark with gold trim */
+.fifa-card.icon {
+  background: linear-gradient(
+    145deg,
+    #0a0a0a 0%,
+    #1a1a1a 30%,
+    #0f0f0f 60%,
+    #111 100%
+  );
+  box-shadow:
+    0 0 30px rgba(201, 162, 39, 0.8),
+    0 0 60px rgba(201, 162, 39, 0.3),
+    0 8px 32px rgba(0, 0, 0, 0.8),
+    inset 0 0 0 2px rgba(201, 162, 39, 0.5);
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  padding: 14px 16px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* ── Top row ── */
+.card-top {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+  margin-bottom: 4px;
+}
+
+.card-ovr {
+  font-size: 42px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -2px;
+}
+
+.gold .card-ovr { color: #2a1a00; }
+.icon .card-ovr { color: #c9a227; }
+
+.card-position {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.gold .card-position { color: #2a1a00; }
+.icon .card-position { color: #c9a227; }
+
+.card-flag {
+  font-size: 16px;
+  margin-top: 2px;
+}
+
+/* ── Player image area ── */
+.card-image {
+  width: 120px;
+  height: 110px;
+  margin: 0 auto 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.player-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 6px;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+}
+
+.player-silhouette {
+  font-size: 72px;
+  line-height: 1;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Name ── */
+.card-name {
+  font-size: 11.5px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  padding: 0 4px;
+  line-height: 1.2;
+  word-break: break-word;
+  max-width: 100%;
+}
+
+.gold .card-name { color: #1a0f00; }
+.icon .card-name { color: #f0d060; }
+
+/* ── Divider ── */
+.card-divider {
+  width: 80%;
+  height: 1px;
+  margin-bottom: 8px;
+}
+
+.gold .card-divider { background: rgba(42, 26, 0, 0.3); }
+.icon .card-divider { background: rgba(201, 162, 39, 0.4); }
+
+/* ── Stats grid ── */
+.card-stats {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  justify-content: center;
+}
+
+.stats-col {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.stat-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.stat-value {
+  font-size: 13px;
+  font-weight: 900;
+  min-width: 22px;
+  text-align: right;
+}
+
+.stat-label {
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.gold .stat-value { color: #1a0f00; }
+.gold .stat-label { color: #3a2a00; }
+.icon .stat-value { color: #f0d060; }
+.icon .stat-label { color: #a08040; }
+
+/* ── ICON badge ── */
+.icon-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #c9a227;
+  border: 1px solid #c9a227;
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+
+/* ── Upgrade animation ── */
+@keyframes iconReveal {
+  0%   { transform: scale(1) rotateY(0deg); filter: brightness(1); }
+  25%  { transform: scale(1.1) rotateY(90deg); filter: brightness(3); }
+  50%  { transform: scale(1.15) rotateY(180deg); filter: brightness(5); }
+  75%  { transform: scale(1.1) rotateY(270deg); filter: brightness(3); }
+  100% { transform: scale(1) rotateY(360deg); filter: brightness(1); }
+}
+
+.animate-upgrade {
+  animation: iconReveal 1.2s ease-in-out;
+}
+
+/* ── Large card variant for card view page ── */
+.fifa-card.large {
+  width: 300px;
+  height: 435px;
+}
+
+.fifa-card.large .card-ovr    { font-size: 58px; }
+.fifa-card.large .card-position { font-size: 18px; }
+.fifa-card.large .card-flag   { font-size: 22px; }
+.fifa-card.large .card-image  { width: 160px; height: 150px; }
+.fifa-card.large .player-silhouette { font-size: 96px; }
+.fifa-card.large .card-name   { font-size: 15px; letter-spacing: 2px; }
+.fifa-card.large .stat-value  { font-size: 17px; min-width: 28px; }
+.fifa-card.large .stat-label  { font-size: 11px; }
+.fifa-card.large .stats-col   { gap: 5px; }
+.fifa-card.large .card-stats  { gap: 18px; }
+.fifa-card.large .icon-badge  { font-size: 12px; top: 16px; right: 16px; }
