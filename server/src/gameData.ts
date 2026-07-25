@@ -290,29 +290,29 @@ export const ROLES: Role[] = [
   {
     id: 'veto',
     name: 'Vetoretten',
-    // Used BEFORE challenge starts — cancels it entirely
-    description: 'Annullerer én udfordring INDEN den begynder. Simon slipper fuldstændigt — ingen straf, ingen belønning.',
+    // Used BEFORE challenge starts — cancels it, roleHolder defines a brand new challenge instead
+    description: 'Annullerer én udfordring INDEN den begynder — og du definerer selv en helt ny udfordring der kører i stedet. Admin registrerer den nye udfordring manuelt.',
     powerType: 'veto_challenge',
   },
   {
     id: 'medic',
     name: 'Læge',
-    // Used BEFORE challenge starts — Simon attempts but penalty is blocked
-    description: 'Aktiveres INDEN en udfordring: Simon forsøger uden risiko. Går det galt sker der ingenting med hans stats.',
+    // Used BEFORE challenge — Simon gets a drink he must finish simultaneously
+    description: 'Udskrives INDEN en udfordring: du vælger en drink som Simon skal indtage som "medicin" sideløbende med udfordringen. Drikken skal være færdig inden udfordringen slutter.',
     powerType: 'immunity',
   },
   {
     id: 'physio',
     name: 'Fysioterapeut',
     // Used AFTER Simon fails — removes the stat penalty, but challenge stays failed
-    description: 'Bruges EFTER Simon fejler: fjerner stat-straffen, men udfordringen forbliver fejlet på kortet.',
+    description: 'Fysioterapeuten sprinter ind på banen med isvask og tape! Bruges EFTER Simon fejler: skaden behandles og stat-straffen forsvinder — men dommen på kortet kan ikke ændres.',
     powerType: 'remove_penalty',
   },
   {
     id: 'var_judge',
     name: 'VAR-dommer',
-    // Used AFTER Simon fails — overturns result to success, Simon gets full rewards
-    description: 'Bruges EFTER Simon fejler: VAR viser andet! Vender resultatet til klaret — Simon får fuld belønning.',
+    // Used AFTER any result — reverses it AND roleHolder adds a custom penalty or reward
+    description: 'VAR har set det igen! Bruges EFTER en udfordring: vender resultatet (klaret→fejlet eller fejlet→klaret) OG du bestemmer selv én ekstra belønning eller straf som admin tilføjer manuelt.',
     powerType: 'overturn_fail',
   },
 ];
