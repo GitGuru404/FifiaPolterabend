@@ -26,7 +26,8 @@ interface Props {
 }
 
 export default function GroomView({ state }: Props) {
-  const { groomCard, phase } = state;
+  const { groomCard, phase, challenges } = state;
+  const activeChallenge = challenges.find((c) => c.status === 'active');
 
   return (
     <div className="groom-view">
@@ -65,6 +66,26 @@ export default function GroomView({ state }: Props) {
         <span className="groom-ovr-label">OVR</span>
         <span className="groom-ovr-value">{groomCard.ovr}</span>
       </div>
+
+      {/* Active challenge — shown so Simon knows what's coming */}
+      {activeChallenge && (
+        <div className="groom-active-challenge">
+          <div className="groom-challenge-label">
+            {activeChallenge.isBossChallenge ? '⚡ BOSS CHALLENGE' : '▶ AKTIV UDFORDRING'}
+          </div>
+          <div className="groom-challenge-name">{activeChallenge.name}</div>
+          <div className="groom-challenge-desc">{activeChallenge.description}</div>
+          {activeChallenge.rewards.length > 0 && (
+            <div className="groom-challenge-rewards">
+              {activeChallenge.rewards.map((r, i) => (
+                <span key={i} className="groom-reward-chip">
+                  +{r.amount} {r.stat.toUpperCase()}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
 
       <div className="groom-phase-dots">
         {PHASES.map((_, i) => (

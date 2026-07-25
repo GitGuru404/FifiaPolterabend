@@ -146,6 +146,59 @@
   flex-shrink: 0;
 }
 
+/* Active challenge panel */
+.groom-active-challenge {
+  width: 100%;
+  max-width: 340px;
+  background: #162030;
+  border: 1px solid rgba(240, 208, 96, 0.3);
+  border-left: 3px solid #f0d060;
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.groom-challenge-label {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #f0d060;
+  text-transform: uppercase;
+}
+
+.groom-challenge-name {
+  font-size: 15px;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+
+.groom-challenge-desc {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.5;
+}
+
+.groom-challenge-rewards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.groom-reward-chip {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: #f0d060;
+  background: rgba(240, 208, 96, 0.12);
+  border: 1px solid rgba(240, 208, 96, 0.25);
+  border-radius: 4px;
+  padding: 3px 8px;
+}
+
 /* Phase dots */
 .groom-phase-dots {
   display: flex;

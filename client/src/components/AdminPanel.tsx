@@ -106,7 +106,7 @@ export default function AdminPanel({ state, roles, adminPassword }: Props) {
     setIconConfirm(false);
   }
 
-  const currentPhaseRoles = state.playerRoles.filter((pr) => pr.phase === state.phase);
+  const currentPhaseRoles = state.playerRoles;
   const helpers = state.helpers;
   const helperNames = helpers.assigned.map(
     (id) => state.players.find((p) => p.id === id)?.name ?? id

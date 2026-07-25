@@ -43,9 +43,7 @@ interface Props {
 export default function RoleView({ state, identity, roles }: Props) {
   const { phase, playerRoles, helpers } = state;
 
-  const myRole = playerRoles.find(
-    (pr) => pr.playerId === identity.playerId && pr.phase === phase
-  );
+  const myRole = playerRoles.find((pr) => pr.playerId === identity.playerId);
 
   const roleInfo = myRole ? roles.find((r) => r.id === myRole.roleId) : null;
   const icon = roleInfo ? (POWER_ICONS[roleInfo.powerType] ?? '🃏') : '🃏';
@@ -91,7 +89,7 @@ export default function RoleView({ state, identity, roles }: Props) {
           </div>
 
           {myRole?.used && !isHelper ? (
-            <div className="role-status used">✓ Magt brugt denne fase</div>
+            <div className="role-status used">✓ Magt brugt — kan ikke bruges igen</div>
           ) : isHelper ? (
             <div className="role-status helper">🤝 Hjælper aktiv</div>
           ) : (
@@ -119,7 +117,7 @@ export default function RoleView({ state, identity, roles }: Props) {
             <li>Din magt er brugt for denne fase</li>
           </ol>
           <p className="instructions-note">
-            Bruger du ikke magten inden fasen slutter, mister du den.
+            Du kan kun bruge din magt én gang i løbet af hele dagen.
           </p>
         </div>
       )}

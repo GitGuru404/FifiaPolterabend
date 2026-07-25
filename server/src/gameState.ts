@@ -36,6 +36,12 @@ export function assignRolesForPhase(state: GameState, phase: number): PlayerRole
   return roles;
 }
 
+// Assign roles once at game start — roles are permanent for the whole event
+function assignRolesOnce(state: GameState): PlayerRole[] {
+  if (state.playerRoles.length > 0) return state.playerRoles;
+  return assignRolesForPhase(state, 0);
+}
+
 function emptyHelpers(phase: number): Helpers {
   return { phase, volunteered: [], assigned: [], finalized: false };
 }
@@ -70,8 +76,8 @@ export function advancePhase(state: GameState, newPhase: number): GameState {
     status: c.phase === newPhase && c.status === 'locked' ? 'pending' : c.status,
   }));
 
-  // Assign new roles for this phase (all roles now rotate)
-  s.playerRoles = assignRolesForPhase(s, newPhase);
+  // Assign roles once for the whole event (no rotation between phases)
+  s.playerRoles = assignRolesOnce(s);
 
   // Reset helpers for new phase
   s.helpers = emptyHelpers(newPhase);
@@ -181,10 +187,7 @@ export function finalizeHelpers(state: GameState): GameState {
   h.finalized = true;
   s.helpers = h;
 
-  // Mark helpers' role as used for this phase
-  s.playerRoles = s.playerRoles.map((pr) =>
-    assigned.includes(pr.playerId) && pr.phase === s.phase ? { ...pr, used: true } : pr
-  );
+  // Helpers' role power is paused (shown via isHelper flag, not the used flag)
 
   const names = assigned.map((id) => s.players.find((p) => p.id === id)?.name ?? id).join(', ');
   s.log = [...s.log, logEntry(`🤝 Hjælpere fastsat: ${names}`, 'helper')];
@@ -194,7 +197,7 @@ export function finalizeHelpers(state: GameState): GameState {
 export function markRoleUsed(state: GameState, playerId: string): GameState {
   const s = { ...state };
   s.playerRoles = s.playerRoles.map((pr) =>
-    pr.playerId === playerId && pr.phase === s.phase ? { ...pr, used: true } : pr
+    pr.playerId === playerId ? { ...pr, used: true } : pr
   );
   return s;
 }

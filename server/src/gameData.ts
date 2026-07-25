@@ -40,16 +40,9 @@ export const INITIAL_CHALLENGES: Omit<Challenge, 'status'>[] = [
     penalties: [{ stat: 'legend', amount: -1 }],
   },
   {
-    id: 'c3', phase: 0,
-    name: 'Hårtjekket',
-    description: 'Gruppen analyserer din hårlinje i 60 sekunder og giver en officiel vurdering 1-10. Du skal acceptere dommen med et smil — ingen indsigelser. Under 4 = fejlet.',
-    rewards: [{ stat: 'hairline', amount: 4 }],
-    penalties: [{ stat: 'hairline', amount: -3 }],
-  },
-  {
     id: 'c4', phase: 0,
     name: 'Fremtidsprognoser',
-    description: 'Ring til din mor på højtaler og fortæl hende, at du er ved at blive gift — og at håret er på vej ud. Du skal holde samtalen i gang i mindst 90 sekunder.',
+    description: 'Ring til den lokale McDonald\'s på højtaler og prøv at bestille en pizza. Du skal naturligt inddrage din kommende kone i samtalen. Samtalen skal holdes aktiv i mindst 90 sekunder.',
     rewards: [{ stat: 'legend', amount: 3 }],
     penalties: [{ stat: 'legend', amount: -2 }],
   },
@@ -70,13 +63,6 @@ export const INITIAL_CHALLENGES: Omit<Challenge, 'status'>[] = [
     penalties: [{ stat: 'bottle', amount: -2 }],
   },
   {
-    id: 'c7', phase: 1,
-    name: 'Weber Life — Influencer Pitch',
-    description: 'Med spray-tan og kostume på, optag en 45-sekunders sponsorbid til et fiktivt brand om dit personlige brand "Weber Life". Skal postes på Instagram.',
-    rewards: [{ stat: 'content', amount: 4 }],
-    penalties: [{ stat: 'content', amount: -2 }],
-  },
-  {
     id: 'c8', phase: 1,
     name: 'Catwalk Weber',
     description: 'Simon går ned ad en improviseret catwalk for gruppen og præsenterer sit kostume-look som haute couture. Gruppen bedømmer 1-10. Under 6 = fejlet.',
@@ -91,13 +77,6 @@ export const INITIAL_CHALLENGES: Omit<Challenge, 'status'>[] = [
     description: 'Overlev som primær target i mindst 3 runder uden at give op.',
     rewards: [{ stat: 'stamina', amount: 4 }],
     penalties: [{ stat: 'stamina', amount: -2 }],
-  },
-  {
-    id: 'c10', phase: 2,
-    name: 'Krigskorrespondenten',
-    description: 'Film en live "battle report" fra slagmarken og post den. Obligatorisk dramatisk kommentar til kameraet.',
-    rewards: [{ stat: 'content', amount: 3 }],
-    penalties: [{ stat: 'content', amount: -2 }],
   },
   {
     id: 'c11', phase: 2,
@@ -182,10 +161,10 @@ export const INITIAL_CHALLENGES: Omit<Challenge, 'status'>[] = [
   },
   {
     id: 'c22', phase: 4,
-    name: 'Sommelier Weber',
-    description: 'Simon vurderer og beskriver vinen til middagen som en professionel sommelier — på kamera. Mindst 1 minut. Gruppen bedømmer troværdighed 1-10. Under 5 = fejlet.',
-    rewards: [{ stat: 'content', amount: 3 }],
-    penalties: [{ stat: 'content', amount: -2 }],
+    name: 'Quiz-mester',
+    description: 'En af gæsterne har forberedt en quiz til middagen. Simon skal vinde quizzen — eller score højere end flertallet af de andre deltagere. Vinder han ikke = fejlet.',
+    rewards: [{ stat: 'legend', amount: 4 }],
+    penalties: [{ stat: 'legend', amount: -3 }],
   },
   {
     id: 'c23', phase: 4,
@@ -213,7 +192,7 @@ export const INITIAL_CHALLENGES: Omit<Challenge, 'status'>[] = [
   {
     id: 'c26', phase: 5,
     name: 'Dobbelt Agent',
-    description: 'Simon ringer til én person der ikke er til stede og overbeviser dem om at polterabendet er aflyst. Holder han illusionen i 60 sekunder = klaret.',
+    description: 'Simon ringer til sin far på højtaler og fortæller ham, at brylluppet er aflyst. Holder han illusionen i 60 sekunder uden at bryde ud = klaret.',
     rewards: [{ stat: 'bottle', amount: 3 }],
     penalties: [{ stat: 'bottle', amount: -2 }],
   },
@@ -229,7 +208,7 @@ export const INITIAL_CHALLENGES: Omit<Challenge, 'status'>[] = [
   {
     id: 'c28', phase: 6,
     name: 'ICON Challenge',
-    description: 'Hemmelig udfordring designet af brudepigerne — afsløret ved midnat. Fuldfører Simon den: OVR → 99, kortet opgraderes til ICON-status, og han bliver SIMON WEBER VALENTIN. Advarsel: HAIRLINE-statistikken vil lide under processen.',
+    description: 'Hemmelig udfordring designet af brudepigerne — afsløret ved midnat. Fuldfører Simon den: OVR → 99, kortet opgraderes til ICON-status, og han bliver SIMON WEBER VALENTIN.',
     rewards: [
       { stat: 'content', amount: 5 },
       { stat: 'stamina', amount: 5 },
