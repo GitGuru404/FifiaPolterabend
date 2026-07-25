@@ -305,7 +305,7 @@ export const ROLES: Role[] = [
     id: 'physio',
     name: 'Fysioterapeut',
     // Used AFTER Simon fails — removes the stat penalty, but challenge stays failed
-    description: 'Fysioterapeuten sprinter ind på banen med isvask og tape! Bruges EFTER Simon fejler: skaden behandles og stat-straffen forsvinder — men dommen på kortet kan ikke ændres.',
+    description: 'Simon er for skadet til at klare det alene! Bruges INDEN en udfordring: du erklærer Simon ude af stand og udpeger én person fra gruppen der SKAL hjælpe ham — uanset om de meldte sig eller ej.',
     powerType: 'remove_penalty',
   },
   {
