@@ -1,0 +1,774 @@
+<title>Weber FC — Polterabend Playbook</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  /* ── Tokens ───────────────────────────────────────────────── */
+  :root {
+    --paper:   #F5F4F0;
+    --paper2:  #ECEAE4;
+    --ink:     #0D1520;
+    --ink2:    #334155;
+    --ink3:    #64748B;
+    --gold:    #B8920A;
+    --gold-bg: rgba(184,146,10,0.10);
+    --gold-border: rgba(184,146,10,0.35);
+    --green:   #15803D;
+    --green-bg: rgba(21,128,61,0.08);
+    --red:     #B91C1C;
+    --red-bg:  rgba(185,28,28,0.08);
+    --blue:    #1D4ED8;
+    --blue-bg: rgba(29,78,216,0.08);
+    --panel:   #E8E6DF;
+    --rule:    rgba(13,21,32,0.10);
+    --radius:  8px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper:   #0D1520;
+      --paper2:  #162030;
+      --ink:     #F0EEE8;
+      --ink2:    #CBD5E1;
+      --ink3:    #94A3B8;
+      --gold:    #F0C840;
+      --gold-bg: rgba(240,200,64,0.10);
+      --gold-border: rgba(240,200,64,0.30);
+      --green:   #4ADE80;
+      --green-bg: rgba(74,222,128,0.08);
+      --red:     #F87171;
+      --red-bg:  rgba(248,113,113,0.08);
+      --blue:    #60A5FA;
+      --blue-bg: rgba(96,165,250,0.08);
+      --panel:   #1E2D42;
+      --rule:    rgba(255,255,255,0.08);
+    }
+  }
+  :root[data-theme="light"] {
+    --paper:#F5F4F0;--paper2:#ECEAE4;--ink:#0D1520;--ink2:#334155;--ink3:#64748B;
+    --gold:#B8920A;--gold-bg:rgba(184,146,10,0.10);--gold-border:rgba(184,146,10,0.35);
+    --green:#15803D;--green-bg:rgba(21,128,61,0.08);--red:#B91C1C;--red-bg:rgba(185,28,28,0.08);
+    --blue:#1D4ED8;--blue-bg:rgba(29,78,216,0.08);--panel:#E8E6DF;--rule:rgba(13,21,32,0.10);
+  }
+  :root[data-theme="dark"] {
+    --paper:#0D1520;--paper2:#162030;--ink:#F0EEE8;--ink2:#CBD5E1;--ink3:#94A3B8;
+    --gold:#F0C840;--gold-bg:rgba(240,200,64,0.10);--gold-border:rgba(240,200,64,0.30);
+    --green:#4ADE80;--green-bg:rgba(74,222,128,0.08);--red:#F87171;--red-bg:rgba(248,113,113,0.08);
+    --blue:#60A5FA;--blue-bg:rgba(96,165,250,0.08);--panel:#1E2D42;--rule:rgba(255,255,255,0.08);
+  }
+
+  /* ── Base ─────────────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 1rem;
+    line-height: 1.65;
+    padding: 0 16px 80px;
+  }
+  h1,h2,h3,h4,h5 {
+    font-family: 'Arial Narrow', 'Helvetica Neue Condensed', Arial, sans-serif;
+    font-weight: 900;
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+  p { max-width: 66ch; }
+  a { color: var(--gold); }
+
+  /* ── Layout ───────────────────────────────────────────────── */
+  .doc {
+    max-width: 740px;
+    margin: 0 auto;
+  }
+
+  /* ── Masthead ─────────────────────────────────────────────── */
+  .masthead {
+    border-bottom: 3px solid var(--gold);
+    padding: 40px 0 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .masthead-eyebrow {
+    font-family: 'Arial Narrow', Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .masthead-title {
+    font-size: clamp(2.4rem, 7vw, 3.6rem);
+    letter-spacing: -1px;
+    color: var(--ink);
+  }
+  .masthead-title span { color: var(--gold); }
+  .masthead-sub {
+    font-size: 1rem;
+    color: var(--ink3);
+    margin-top: 4px;
+    font-style: italic;
+  }
+  .theme-toggle {
+    margin-top: 16px;
+    align-self: flex-start;
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink3);
+    cursor: pointer;
+    letter-spacing: 0.3px;
+  }
+
+  /* ── Section ──────────────────────────────────────────────── */
+  .section {
+    margin-top: 48px;
+  }
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ink3);
+    margin-bottom: 10px;
+  }
+  .section-title {
+    font-size: 1.75rem;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  .section > p, .section > ul, .section > ol {
+    color: var(--ink2);
+    margin-bottom: 12px;
+  }
+  hr.rule {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 40px 0 0;
+  }
+
+  /* ── Phase block ──────────────────────────────────────────── */
+  .phase-block {
+    margin-top: 32px;
+    padding-left: 20px;
+    border-left: 3px solid var(--gold-border);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .phase-block.active { border-left-color: var(--gold); }
+  .phase-num {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .phase-name {
+    font-size: 1.3rem;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+  .phase-desc {
+    font-size: 0.9rem;
+    color: var(--ink2);
+    line-height: 1.6;
+  }
+
+  /* ── Call-out panels ──────────────────────────────────────── */
+  .panel {
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .panel-label {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .panel p, .panel li { font-size: 0.9rem; color: var(--ink2); line-height: 1.55; }
+  .panel ul, .panel ol { padding-left: 18px; display: flex; flex-direction: column; gap: 4px; }
+
+  .panel.admin {
+    background: var(--gold-bg);
+    border: 1px solid var(--gold-border);
+  }
+  .panel.admin .panel-label { color: var(--gold); }
+
+  .panel.do {
+    background: var(--green-bg);
+    border: 1px solid rgba(21,128,61,0.2);
+  }
+  .panel.do .panel-label { color: var(--green); }
+
+  .panel.warn {
+    background: var(--red-bg);
+    border: 1px solid rgba(185,28,28,0.2);
+  }
+  .panel.warn .panel-label { color: var(--red); }
+
+  .panel.info {
+    background: var(--blue-bg);
+    border: 1px solid rgba(29,78,216,0.2);
+  }
+  .panel.info .panel-label { color: var(--blue); }
+
+  .panel.neutral {
+    background: var(--paper2);
+    border: 1px solid var(--rule);
+  }
+  .panel.neutral .panel-label { color: var(--ink3); }
+
+  /* ── Step list ────────────────────────────────────────────── */
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 4px 0;
+  }
+  .step {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .step-num {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: var(--paper);
+    font-size: 12px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Arial Narrow', Arial, sans-serif;
+    margin-top: 1px;
+  }
+  .step-body {
+    font-size: 0.9rem;
+    color: var(--ink2);
+    line-height: 1.6;
+    flex: 1;
+  }
+  .step-body strong { color: var(--ink); }
+
+  /* ── Code / value pill ────────────────────────────────────── */
+  code {
+    font-family: 'Menlo', 'Consolas', monospace;
+    font-size: 0.85em;
+    background: var(--panel);
+    color: var(--gold);
+    padding: 2px 6px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+    font-weight: 700;
+  }
+
+  /* ── Checklist ────────────────────────────────────────────── */
+  .checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 8px 0;
+  }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: var(--ink2);
+    line-height: 1.5;
+  }
+  .check {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--rule);
+    border-radius: 3px;
+    margin-top: 2px;
+    background: var(--paper);
+  }
+
+  /* ── Role grid ────────────────────────────────────────────── */
+  .role-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .role-card {
+    background: var(--paper2);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .role-card-name {
+    font-family: 'Arial Narrow', Arial, sans-serif;
+    font-size: 0.95rem;
+    font-weight: 900;
+    color: var(--ink);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .role-card-power {
+    font-size: 0.78rem;
+    color: var(--ink3);
+    line-height: 1.45;
+  }
+
+  /* ── Stat table ───────────────────────────────────────────── */
+  .stat-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  .stat-table th {
+    text-align: left;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--ink3);
+    padding: 6px 10px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .stat-table td {
+    padding: 8px 10px;
+    color: var(--ink2);
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .stat-table tr:last-child td { border-bottom: none; }
+  .stat-name { font-weight: 700; color: var(--ink); white-space: nowrap; }
+  .overflow-x { overflow-x: auto; }
+
+  /* ── Footer ───────────────────────────────────────────────── */
+  .footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+    font-size: 0.8rem;
+    color: var(--ink3);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  @media (max-width: 520px) {
+    .role-grid { grid-template-columns: 1fr 1fr; }
+    .masthead-title { font-size: 2rem; }
+  }
+</style>
+
+<div class="doc">
+
+  <!-- Masthead -->
+  <header class="masthead">
+    <div class="masthead-eyebrow">EA Sports FC · Polterabend Edition</div>
+    <h1 class="masthead-title">WEBER FC<br><span>Playbook</span></h1>
+    <p class="masthead-sub">Admin guide for running the game on the day — read this before kick-off.</p>
+    <button class="theme-toggle" onclick="
+      const r = document.documentElement;
+      const cur = r.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+      r.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
+    ">Toggle theme</button>
+  </header>
+
+
+  <!-- ══ BEFORE THE DAY ══════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-label">Forberedelse</div>
+    <h2 class="section-title">Inden dagen starter</h2>
+    <p>Kør igennem denne liste aftenen før eller tidligt om morgenen. Det tager 5 minutter.</p>
+
+    <br>
+    <div class="panel admin">
+      <div class="panel-label">⚙️ Admin login</div>
+      <p>Åbn appen → skriv invitationskoden <code>WEBER2025</code> → tryk "ADMIN LOGIN" → skriv kodeordet <code>admin123</code>. Du er nu admin og ser det ekstra admin-panel.</p>
+    </div>
+
+    <br>
+    <ul class="checklist">
+      <li><div class="check"></div> Lav en test-kørsel: log ind som admin, nulstil spillet (Admin → Oversigt → Nulstil til start)</li>
+      <li><div class="check"></div> Bekræft at Simons billede vises korrekt på FIFA-kortet</li>
+      <li><div class="check"></div> Send invitationskoden <code>WEBER2025</code> til alle i gruppen — fx i en gruppebesked</li>
+      <li><div class="check"></div> Fortæl <em>ikke</em> Simon om hans specielle kode endnu — giv ham <code>GROOM99</code> når I er samlet</li>
+      <li><div class="check"></div> Sørg for at din telefon er opladet og har forbindelse</li>
+      <li><div class="check"></div> Nulstil spillet én gang til, lige inden I går i gang — så alle starter fra 0</li>
+    </ul>
+  </section>
+
+
+  <!-- ══ HOW EVERYONE JOINS ══════════════════════════════════ -->
+  <section class="section">
+    <div class="section-label">Tilmelding</div>
+    <h2 class="section-title">Sådan logger alle ind</h2>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body"><strong>Gruppen åbner appen</strong> — del linket: <code>fifiapolterabend-production.up.railway.app</code></div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body"><strong>Invitationskode:</strong> de skriver <code>WEBER2025</code> og trykker Fortsæt</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body"><strong>Navn:</strong> de skriver deres eget navn frit og trykker Deltag. De er nu i spillet.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body"><strong>Simon:</strong> giv ham koden <code>GROOM99</code>. Han ser sit eget FIFA-kort og stats — men ingen udfordringer (det ville spolere overraskelsen).</div>
+      </div>
+    </div>
+
+    <br>
+    <div class="panel info">
+      <div class="panel-label">ℹ️ Hvis nogen mister forbindelsen</div>
+      <p>Appen husker dem automatisk (localStorage). De åbner bare linket igen og er logget ind med samme navn og kode. Intet går tabt.</p>
+    </div>
+  </section>
+
+
+  <!-- ══ ADMIN OVERVIEW ══════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-label">Dit kontrolrum</div>
+    <h2 class="section-title">Admin-panelet</h2>
+    <p>Du navigerer med de fire faneblade øverst i admin-panelet:</p>
+
+    <br>
+    <div class="overflow-x">
+      <table class="stat-table">
+        <thead>
+          <tr>
+            <th>Fane</th>
+            <th>Hvad du gør her</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="stat-name">🎮 Oversigt</td>
+            <td>Skift fase, aktiver ICON-upgrade, nulstil spillet, se hændelseslog</td>
+          </tr>
+          <tr>
+            <td class="stat-name">⚡ Udfordringer</td>
+            <td>Se alle udfordringer, start dem én ad gangen, marker klaret/fejlet</td>
+          </tr>
+          <tr>
+            <td class="stat-name">🃏 Roller</td>
+            <td>Se hvem der har hvilken rolle, finalisér hjælpere, marker magt brugt</td>
+          </tr>
+          <tr>
+            <td class="stat-name">👥 Spillere</td>
+            <td>Tilføj/fjern spillere manuelt (til sent ankomne eller dem der glemmer at logge ind)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+
+  <!-- ══ PHASE FLOW ══════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-label">Spillets forløb</div>
+    <h2 class="section-title">Fase for fase</h2>
+    <p>Spillet har 7 faser. Du styrer hvornår hver fase begynder og hvornår hver udfordring kører. Her er den præcise rækkefølge du følger <em>for hver fase</em>:</p>
+
+    <br>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>Start fasen:</strong> Admin → Oversigt → tryk på den rigtige fase. Du får en bekræftelsesdialog — tryk Bekræft. Alle spillere ser nu fasen opdateret på deres skærm.
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>Hjælper-popup:</strong> Alle spillere (undtagen Simon) ser automatisk en popup: "Vil du hjælpe Simon denne fase?". De kan melde sig. Du ser tilmeldingerne live under Roller-fanen.
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong>Finalisér hjælpere:</strong> Når folk har haft tid til at melde sig (30–60 sekunder), tryk "✓ Afslut hjælpertilmelding" under Roller-fanen. Appen vælger tilfældigt op til 4 hjælpere og låser listen.
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <strong>Udfordringerne:</strong> Gå til Udfordringer-fanen. Du ser alle udfordringer for den aktuelle fase med status "⏳ Afventer". <em>Start dem én ad gangen</em> — tryk ▶ Start → bekræft. Kun én kan køre ad gangen.
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <strong>Afslut udfordringen:</strong> Når Simon har forsøgt, marker enten ✅ Klaret, ⚡ Klaret ×2 (dobbelt bonus — bruges ved ekstra imponerende præstation), eller ❌ Fejlet. Stats opdateres live på alles skærme.
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-body">
+          <strong>Roller:</strong> Hver spiller har én fast rolle for <em>hele dagen</em> — den roterer ikke. Magten kan kun bruges én gang i alt. Når nogen bruger sin magt, bekræfter du det under Roller-fanen → tryk "Magt brugt". Det markerer rollen som permanent forbrugt.
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">7</div>
+        <div class="step-body">
+          <strong>Næste fase:</strong> Gentag fra trin 1 når I er klar til at gå videre.
+        </div>
+      </div>
+    </div>
+
+    <br>
+    <div class="panel warn">
+      <div class="panel-label">⚠️ Husk</div>
+      <p>Du behøver ikke køre alle udfordringer i en fase. Springer du en over, forbliver den bare "Afventer". Det er op til dig og stemningen på dagen.</p>
+    </div>
+  </section>
+
+
+  <!-- ══ THE 7 PHASES ════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-label">De syv faser</div>
+    <h2 class="section-title">Hvad sker hvornår</h2>
+
+    <div class="phase-block">
+      <div class="phase-num">Fase 1</div>
+      <div class="phase-name">Morgenoverraskning</div>
+      <div class="phase-desc">Kickoff. Simon vågner til en overraskelse. Start spillet her — introducer FIFA-kortet for gruppen og lad alle logge ind, inden I begynder på udfordringerne.</div>
+    </div>
+
+    <div class="phase-block">
+      <div class="phase-num">Fase 2</div>
+      <div class="phase-name">Spray tan & Kostume</div>
+      <div class="phase-desc">Temaet sættes. Kostumerne tages på. God fase til de mere ydmygende udfordringer — og til at teste Simons tålmodighed.</div>
+    </div>
+
+    <div class="phase-block">
+      <div class="phase-num">Fase 3</div>
+      <div class="phase-name">Paintball</div>
+      <div class="phase-desc">Fysisk. Adrenalin. Stamina-udfordringer er oplagt her. Udfordringer med løb eller kropslige krav passer perfekt.</div>
+    </div>
+
+    <div class="phase-block">
+      <div class="phase-num">Fase 4</div>
+      <div class="phase-name">Park & Beer Olympics</div>
+      <div class="phase-desc">Bottle-stats i centrum. Sociale udfordringer og konkurrencer. God stemning, lavere intensitet — det er halvleg.</div>
+    </div>
+
+    <div class="phase-block">
+      <div class="phase-num">Fase 5</div>
+      <div class="phase-name">Middag</div>
+      <div class="phase-desc">Legend-udfordringer. Taler, minder, sange. Den emotionelle fase — her springer de sentimentale udfordringer frem.</div>
+    </div>
+
+    <div class="phase-block">
+      <div class="phase-num">Fase 6</div>
+      <div class="phase-name">Partybussen</div>
+      <div class="phase-desc">Moves og Content er i spil. Dans, video-udfordringer, sociale medie-stunts. Energiniveauet stiger igen.</div>
+    </div>
+
+    <div class="phase-block active">
+      <div class="phase-num">Fase 7 — FINALE</div>
+      <div class="phase-name">Klubben ⚡</div>
+      <div class="phase-desc">Boss challenge. Den store nat. Afslut aftenen med ICON-upgradet (se nedenfor) — men kun når Simon har klaret den ultimative udfordring.</div>
+    </div>
+  </section>
+
+
+  <!-- ══ HELPER SYSTEM ═══════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-label">Hjælper-systemet</div>
+    <h2 class="section-title">Hvad er en hjælper?</h2>
+    <p>I starten af hver fase spørger appen alle spillere om de vil hjælpe Simon med fasens udfordringer. Hjælperes rolle-magt er sat på pause i den fase de hjælper — men rollen er stadig deres, og de kan bruge den i en anden fase hvis den ikke allerede er brugt.</p>
+
+    <br>
+    <div class="panel neutral">
+      <div class="panel-label">Hvad hjælpere gør i praksis</div>
+      <p>Det er op til jer. Idéen er at hjælperne fysisk er ved Simons side og bakker ham op — de coacher, de løber med, de holder ham i hånden. Brug det kreativt efter stemningen.</p>
+    </div>
+
+    <br>
+    <div class="panel admin">
+      <div class="panel-label">⚙️ Admin: hvad du gør</div>
+      <ul>
+        <li>Giv folk 30–60 sekunder til at melde sig via popup'en</li>
+        <li>Gå til Roller-fanen og tryk <strong>"✓ Afslut hjælpertilmelding"</strong></li>
+        <li>Appen vælger tilfældigt op til 4 — du ser hvem der blev valgt</li>
+        <li>Boss challenge (Fase 7) har <em>ingen</em> hjælpere — Simon er på egen hånd</li>
+      </ul>
+    </div>
+  </section>
+
+
+  <!-- ══ ROLE SYSTEM ═════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-label">Roller</div>
+    <h2 class="section-title">Rollernes magter</h2>
+    <p>Hver spiller får én tilfældig rolle ved spillets start — den følger dem <strong>hele dagen</strong> og roterer ikke. Magten kan kun bruges <strong>én gang i alt</strong> på tværs af alle faser. Der er præcis 14 roller; hvis I er flere end 14, deles nogle roller af to.</p>
+
+    <br>
+    <div class="role-grid">
+      <div class="role-card"><div class="role-card-name">⚡ Manager</div><div class="role-card-power">Fordobler stat-belønningen på én udfordring — aktiveres inden den afsluttes</div></div>
+      <div class="role-card"><div class="role-card-name">🔄 Ass. Manager</div><div class="role-card-power">Bytter én aktiv udfordring ud med en alternativ — inden Simon begynder</div></div>
+      <div class="role-card"><div class="role-card-name">📉 Agent</div><div class="role-card-power">Forhandler en lettere version af én aktiv udfordring — du bestemmer hvad der lempes</div></div>
+      <div class="role-card"><div class="role-card-name">🔥 Ultras</div><div class="role-card-power">Tilføjer én ekstra betingelse der gør udfordringen sværere — du bestemmer hvad</div></div>
+      <div class="role-card"><div class="role-card-name">⚔️ Kaptajn</div><div class="role-card-power">Udløser en spontan gruppe-mod-Simon ekstra-udfordring — du bestemmer selv opgaven</div></div>
+      <div class="role-card"><div class="role-card-name">⚖️ Dommer</div><div class="role-card-power">Afgør med endelig myndighed alle tvivlsspørgsmål om én udfordring — ingen anke</div></div>
+      <div class="role-card"><div class="role-card-name">🎙️ Kommentator</div><div class="role-card-power">Kommenterer én udfordring live og højt — Simon skal fuldføre uden at reagere</div></div>
+      <div class="role-card"><div class="role-card-name">🍺 Sponsor</div><div class="role-card-power">Bestemmer hvad Simon drikker til den næste udfordring (påvirker BOTTLE)</div></div>
+      <div class="role-card"><div class="role-card-name">⏱️ Transfer Reporter</div><div class="role-card-power">Tilføjer en selvvalgt countdown-timer til én udfordring — overskrider Simon tiden = fejlet</div></div>
+      <div class="role-card"><div class="role-card-name">💪 Målmandstræner</div><div class="role-card-power">Tilføjer et ekstra fysisk eller præstationsbaseret krav til én udfordring</div></div>
+      <div class="role-card" style="border-color:var(--gold-border)"><div class="role-card-name">🚫 Vetoretten</div><div class="role-card-power"><em>INDEN udfordring:</em> Annullerer den — og du definerer selv en helt ny udfordring der kører i stedet</div></div>
+      <div class="role-card" style="border-color:var(--gold-border)"><div class="role-card-name">🛡️ Læge</div><div class="role-card-power"><em>INDEN udfordring:</em> Du vælger en drink Simon skal indtage som "medicin" sideløbende — drikken skal være færdig inden udfordringen slutter</div></div>
+      <div class="role-card" style="border-color:var(--gold-border)"><div class="role-card-name">🩺 Fysioterapeut</div><div class="role-card-power"><em>INDEN udfordring:</em> Erklærer Simon for skadet til at klare det alene — du udpeger én person der SKAL hjælpe, uanset om de meldte sig</div></div>
+      <div class="role-card" style="border-color:var(--gold-border)"><div class="role-card-name">📺 VAR-dommer</div><div class="role-card-power"><em>EFTER udfordring:</em> Vender resultatet (klaret↔fejlet) og tilføjer én ekstra belønning eller straf som du selv vælger</div></div>
+    </div>
+
+    <br>
+    <div class="panel neutral">
+      <div class="panel-label">🛡️ De fire defensive roller — timing er alt</div>
+      <p>De fire guldkantede roller ligner hinanden men bruges på helt forskellige tidspunkter:</p>
+      <ul>
+        <li><strong>Vetoretten</strong> — brug <em>inden</em> udfordringen starter for at droppe den og erstatte med noget nyt</li>
+        <li><strong>Læge</strong> — brug <em>inden</em> udfordringen for at give Simon en sideløbende drink-opgave</li>
+        <li><strong>Fysioterapeut</strong> — brug <em>inden</em> udfordringen for at tvinge én specifik person til at hjælpe Simon</li>
+        <li><strong>VAR-dommer</strong> — brug <em>efter</em> udfordringen er afgjort for at vende resultatet og tilføje din egen belønning/straf</li>
+      </ul>
+    </div>
+
+    <br>
+    <div class="panel admin">
+      <div class="panel-label">⚙️ Admin: sådan bekræfter du en magt</div>
+      <p>Spilleren råber det op → gå til Roller-fanen → find spilleren → tryk "Magt brugt". Rollen markeres som permanent forbrugt — den kan ikke bruges igen resten af dagen. VAR-dommer og Vetoretten kan kræve at du manuelt justerer stats eller registrerer en ny udfordring i appen.</p>
+    </div>
+  </section>
+
+
+  <!-- ══ STATS ═══════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-label">Simons FIFA-kort</div>
+    <h2 class="section-title">Stats — hvad de betyder</h2>
+
+    <div class="overflow-x">
+      <table class="stat-table">
+        <thead>
+          <tr><th>Stat</th><th>Hvad den måler</th><th>Starter</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="stat-name">CONTENT</td><td>Social medie-vilje, influencer-energi</td><td>71</td></tr>
+          <tr><td class="stat-name">STAMINA</td><td>Fysisk udholdenhed (løberen Simon)</td><td>78</td></tr>
+          <tr><td class="stat-name">HAIRLINE</td><td>… hårlinjen. Den siger sig selv.</td><td>63</td></tr>
+          <tr><td class="stat-name">LEGEND</td><td>Gruppens respekt og mytestatus</td><td>74</td></tr>
+          <tr><td class="stat-name">BOTTLE</td><td>Festevne og drikkemot</td><td>72</td></tr>
+          <tr><td class="stat-name">MOVES</td><td>Danseevne og karisma på dansegulvet</td><td>70</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <br>
+    <div class="panel warn">
+      <div class="panel-label">🚨 ICON-hemmeligheden</div>
+      <p>Når ICON-upgradet aktiveres i Fase 7, sættes <strong>alle stats til 99</strong> — undtagen HAIRLINE, som sættes til <strong>1</strong>. Simon ender som en legende. Med en hårgrænse. Hold det hemmeligt indtil øjeblikket.</p>
+    </div>
+  </section>
+
+
+  <!-- ══ THE ICON MOMENT ═════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-label">Finalen</div>
+    <h2 class="section-title">ICON-upgradet ⚡</h2>
+    <p>Det ultimative øjeblik. Gøres på klubben, efter Simon har klaret Boss Challenge. Sørg for at alle er samlet og ser på — det er aftenens klimaks.</p>
+
+    <br>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body"><strong>Vent på det rette øjeblik</strong> — alle skal være samlet, gerne på dansegulvet eller ved baren</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body"><strong>Fortæl Simon</strong> han skal se på sin skærm (eller projicér appen)</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">Admin → Oversigt → <strong>"🏆 Aktiver ICON Upgrade"</strong> → bekræft</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">Kortet animerer og vender — <strong>SIMON WEBER VALENTIN</strong> · 99 OVR · ICON. Alle stats 99. Hairline: 1. 🎉</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══ TROUBLESHOOTING ═════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-label">Fejlfinding</div>
+    <h2 class="section-title">Hvis noget går galt</h2>
+
+    <div class="panel neutral" style="gap:12px">
+      <div class="panel-label">Hurtige løsninger</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num" style="background:var(--ink3)">?</div>
+          <div class="step-body"><strong>Appen reagerer ikke</strong> — genindlæs siden. Appen henter automatisk den seneste tilstand fra serveren.</div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:var(--ink3)">?</div>
+          <div class="step-body"><strong>En spiller er logget ud</strong> — de åbner linket igen og skriver koden <code>WEBER2025</code> + samme navn. De er tilbage på 30 sekunder.</div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:var(--ink3)">?</div>
+          <div class="step-body"><strong>Forkert fase startet</strong> — du kan trykke på en tidligere fase for at gå tilbage. Stats ændres ikke af faseskift alene.</div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:var(--ink3)">?</div>
+          <div class="step-body"><strong>Spiller ikke i systemet</strong> — Admin → Spillere → "+ Tilføj" og skriv deres navn manuelt.</div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:var(--ink3)">?</div>
+          <div class="step-body"><strong>Vil køre en test-kørsel</strong> — Admin → Oversigt → "🔄 Nulstil til start". Nulstiller alt og starter forfra.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══ QUICK REFERENCE ═════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-label">Quick reference</div>
+    <h2 class="section-title">Koder & links</h2>
+
+    <div class="overflow-x">
+      <table class="stat-table">
+        <thead><tr><th>Hvad</th><th>Kode / link</th></tr></thead>
+        <tbody>
+          <tr><td class="stat-name">App-link</td><td><code>fifiapolterabend-production.up.railway.app</code></td></tr>
+          <tr><td class="stat-name">Spillernes kode</td><td><code>WEBER2025</code></td></tr>
+          <tr><td class="stat-name">Simons kode</td><td><code>GROOM99</code></td></tr>
+          <tr><td class="stat-name">Admin kodeord</td><td><code>admin123</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+
+  <hr class="rule">
+  <footer class="footer">
+    <span>Weber FC · Polterabend Edition · 2025</span>
+    <span>Fortroligt — kun til admin</span>
+  </footer>
+
+</div>
