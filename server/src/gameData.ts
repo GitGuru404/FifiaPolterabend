@@ -228,13 +228,13 @@ export const ROLES: Role[] = [
   {
     id: 'manager',
     name: 'Manager',
-    description: 'Fordobler stat-belønningen på én udfordring — aktiveres inden udfordringen afsluttes',
+    description: 'Simon skal bunde en øl INDEN udfordringen begynder. Klarer han det fordobles stat-belønningen. Nægter han eller spilder = normal belønning.',
     powerType: 'double_reward',
   },
   {
     id: 'assistant_manager',
     name: 'Assisterende Manager',
-    description: 'Bytter én aktiv udfordring ud med en alternativ — aktiveres inden Simon begynder',
+    description: 'Du og Simon bunder en øl sammen INDEN udfordringen. Er Simon hurtigst fordobles stat-belønningen. Er du hurtigst = normal belønning.',
     powerType: 'swap_challenge',
   },
   {
@@ -270,7 +270,7 @@ export const ROLES: Role[] = [
   {
     id: 'sponsor',
     name: 'Sponsor',
-    description: 'Bestemmer hvad Simon drikker til den næste udfordring (påvirker BOTTLE)',
+    description: 'Bestemmer hvad Simon skal drikke — kan aktiveres på et hvilket som helst tidspunkt i løbet af dagen, behøver ikke være knyttet til en udfordring.',
     powerType: 'assign_drink',
   },
   {
