@@ -228,7 +228,7 @@ export const ROLES: Role[] = [
   {
     id: 'manager',
     name: 'Manager',
-    description: 'Simon skal bunde en øl INDEN udfordringen begynder. Klarer han det fordobles stat-belønningen. Nægter han eller spilder = normal belønning.',
+    description: 'Simon skal bunde en øl INDEN udfordringen begynder. Klarer han det fordobles stat-belønningen. Nægter han eller spilder = belønningen slår om til straf (stats går ned i stedet for op).',
     powerType: 'double_reward',
   },
   {
