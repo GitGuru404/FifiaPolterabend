@@ -221,96 +221,98 @@ export const INITIAL_CHALLENGES: Omit<Challenge, 'status'>[] = [
   },
 ];
 
-// Roles — Scout, VAR Official, Club President, Kit Man and Tactical Analyst removed
+// Exactly 14 roles — one per guest. Roles are permanent for the whole event.
+// The 4 "defensive" roles are distinct by timing: Veto/Læge = before, Fysio/VAR = after failure.
 export const ROLES: Role[] = [
+  // ── OFFENSIVE / NEUTRAL ──────────────────────────────────────
   {
     id: 'manager',
     name: 'Manager',
-    description: 'Fordobler stat-belønningen på én udfordring',
+    description: 'Fordobler stat-belønningen på én udfordring — aktiveres inden udfordringen afsluttes',
     powerType: 'double_reward',
   },
   {
     id: 'assistant_manager',
     name: 'Assisterende Manager',
-    description: 'Bytter én udfordring ud med en alternativ',
+    description: 'Bytter én aktiv udfordring ud med en alternativ — aktiveres inden Simon begynder',
     powerType: 'swap_challenge',
-  },
-  {
-    id: 'physio',
-    name: 'Fysioterapeut',
-    description: 'Fjerner én stat-straf fra Simon',
-    powerType: 'remove_penalty',
   },
   {
     id: 'agent',
     name: 'Agent',
-    description: 'Nedgraderer én udfordring til en lettere version',
+    description: 'Forhandler en lettere version af én aktiv udfordring — du bestemmer hvilken betingelse der lempes',
     powerType: 'downgrade_challenge',
   },
   {
     id: 'ultras',
     name: 'Ultras',
-    description: 'Gør én udfordring markant sværere',
+    description: 'Tilføjer én ekstra betingelse der gør udfordringen sværere — du bestemmer hvad Simon også skal gøre',
     powerType: 'upgrade_challenge',
+  },
+  {
+    id: 'captain',
+    name: 'Kaptajn',
+    description: 'Udløser en spontan gruppe-mod-Simon ekstra-udfordring — du bestemmer selv hvad Simon skal præstere',
+    powerType: 'group_challenge',
   },
   {
     id: 'referee',
     name: 'Dommer',
-    description: 'Endelig dommer ved alle omstridte udfordringer denne fase',
+    description: 'Afgør med endelig myndighed alle tvivlsspørgsmål om én udfordring — din dom kan ikke ankes',
     powerType: 'judge',
-  },
-  {
-    id: 'press',
-    name: 'Pressechef',
-    description: 'Tvinger en CONTENT-udfordring — Simon skal filme og poste noget',
-    powerType: 'force_content',
   },
   {
     id: 'commentator',
     name: 'Kommentator',
-    description: 'Skal kommentere én udfordring højt og live',
+    description: 'Kommenterer én udfordring live og højt — Simon skal fuldføre uden at reagere på dine kommentarer',
     powerType: 'commentate',
   },
   {
     id: 'sponsor',
     name: 'Sponsor',
-    description: 'Tildeler en drikkeopgave (påvirker BOTTLE)',
+    description: 'Bestemmer hvad Simon drikker til den næste udfordring (påvirker BOTTLE)',
     powerType: 'assign_drink',
   },
   {
     id: 'reporter',
     name: 'Transfer Deadline Reporter',
-    description: 'Tilføjer en countdown-timer til én udfordring',
+    description: 'Tilføjer en selvvalgt countdown-timer til én udfordring — overskrider Simon tiden tæller det som fejlet',
     powerType: 'add_timer',
-  },
-  {
-    id: 'dj',
-    name: 'Stadion-DJ',
-    description: 'Vælger musik/stemning til én udfordring',
-    powerType: 'set_music',
-  },
-  {
-    id: 'captain',
-    name: 'Kaptajn',
-    description: 'Udløser en gruppe-mod-Simon udfordring',
-    powerType: 'group_challenge',
   },
   {
     id: 'gk_coach',
     name: 'Målmandstræner',
-    description: 'Tilføjer et fysisk/færdighedskrav til én udfordring',
+    description: 'Tilføjer et ekstra fysisk eller præstationsbaseret krav til én udfordring',
     powerType: 'add_physical',
   },
+
+  // ── DEFENSIVE — fire distinct timings/effects ─────────────────
   {
-    id: 'social_manager',
-    name: 'Social Media Manager',
-    description: 'Bestemmer hvilken CONTENT-udfordring der postes på hans rigtige konti',
-    powerType: 'decide_post',
+    id: 'veto',
+    name: 'Vetoretten',
+    // Used BEFORE challenge starts — cancels it entirely
+    description: 'Annullerer én udfordring INDEN den begynder. Simon slipper fuldstændigt — ingen straf, ingen belønning.',
+    powerType: 'veto_challenge',
   },
   {
     id: 'medic',
     name: 'Læge',
-    description: 'Giver Simon 5 minutters immunitet mod udfordringer',
+    // Used BEFORE challenge starts — Simon attempts but penalty is blocked
+    description: 'Aktiveres INDEN en udfordring: Simon forsøger uden risiko. Går det galt sker der ingenting med hans stats.',
     powerType: 'immunity',
+  },
+  {
+    id: 'physio',
+    name: 'Fysioterapeut',
+    // Used AFTER Simon fails — removes the stat penalty, but challenge stays failed
+    description: 'Bruges EFTER Simon fejler: fjerner stat-straffen, men udfordringen forbliver fejlet på kortet.',
+    powerType: 'remove_penalty',
+  },
+  {
+    id: 'var_judge',
+    name: 'VAR-dommer',
+    // Used AFTER Simon fails — overturns result to success, Simon gets full rewards
+    description: 'Bruges EFTER Simon fejler: VAR viser andet! Vender resultatet til klaret — Simon får fuld belønning.',
+    powerType: 'overturn_fail',
   },
 ];

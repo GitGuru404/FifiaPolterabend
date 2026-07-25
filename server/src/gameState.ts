@@ -23,14 +23,12 @@ export function assignRolesForPhase(state: GameState, phase: number): PlayerRole
   const shuffledRoles = shuffleArray([...ROLES]);
 
   shuffledPlayers.forEach((player, idx) => {
-    if (idx < shuffledRoles.length) {
-      roles.push({
-        playerId: player.id,
-        roleId: shuffledRoles[idx].id,
-        phase,
-        used: false,
-      });
-    }
+    roles.push({
+      playerId: player.id,
+      roleId: shuffledRoles[idx % shuffledRoles.length].id, // wrap if >14 players
+      phase,
+      used: false,
+    });
   });
 
   return roles;

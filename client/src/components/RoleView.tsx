@@ -12,26 +12,20 @@ const PHASES = [
 ];
 
 const POWER_ICONS: Record<string, string> = {
-  double_reward: '⚡',
-  swap_challenge: '🔄',
-  unlock_secret: '🔍',
-  remove_penalty: '🩺',
-  downgrade_challenge: '📉',
-  upgrade_challenge: '🔥',
-  overturn_fail: '📺',
-  veto_challenge: '🚫',
-  force_content: '📱',
-  assign_costume: '👕',
-  judge: '⚖️',
-  commentate: '🎙️',
-  assign_drink: '🍺',
-  add_timer: '⏱️',
-  set_music: '🎵',
-  group_challenge: '⚔️',
-  add_physical: '💪',
-  preview_challenges: '🔮',
-  decide_post: '📲',
-  immunity: '🛡️',
+  double_reward:      '⚡',
+  swap_challenge:     '🔄',
+  downgrade_challenge:'📉',
+  upgrade_challenge:  '🔥',
+  group_challenge:    '⚔️',
+  judge:              '⚖️',
+  commentate:         '🎙️',
+  assign_drink:       '🍺',
+  add_timer:          '⏱️',
+  add_physical:       '💪',
+  veto_challenge:     '🚫',
+  immunity:           '🛡️',
+  remove_penalty:     '🩺',
+  overturn_fail:      '📺',
 };
 
 interface Props {
@@ -102,7 +96,7 @@ export default function RoleView({ state, identity, roles }: Props) {
         <div className="role-card no-role">
           <div className="role-icon">⏳</div>
           <div className="role-name">Ingen rolle endnu</div>
-          <div className="role-description">Roller tildeles når næste fase begynder.</div>
+          <div className="role-description">Din rolle tildeles når admin starter første fase. Du beholder den hele dagen.</div>
         </div>
       )}
 
